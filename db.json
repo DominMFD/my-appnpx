@@ -1,6 +1,40 @@
 {
-    "users": [
-        {"id": 1, "name": "Matheus", "email": "mfdmatheus@hotmail.com", "senha": "matheus14"},
-        {"id": 2, "name": "Natalia", "email": "nataliina@hotmail.com", "senha": "natalia123"}
-    ]
+  "users": [
+    {
+      "id": 1,
+      "name": "Matheus",
+      "email": "mfdmatheus@hotmail.com",
+      "senha": "matheus14"
+    },
+    {
+      "id": 2,
+      "name": "Natalia",
+      "email": "nataliina@hotmail.com",
+      "senha": "natalia123"
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
+    },
+    {
+      "id": 7,
+      "name": "Kiriko",
+      "email": "kiriko@gmail.com",
+      "password": "123"
+    },
+    {
+      "id": 8,
+      "name": "Kiriko",
+      "email": "kiriko@gmail.com",
+      "password": "123"
+    }
+  ]
 }

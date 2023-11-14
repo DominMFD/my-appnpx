@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import {api} from '../../services/api'
+import React, { useState } from 'react';
+import axios from "axios";
 
 import {Column, Container, SubTitleLogin, Title, TitleLogin, Wrapper, ButtonArea, TextLogin, TextGreen, TitleRegister} from './styles'
 
@@ -19,9 +21,38 @@ const schema = yup
 
 const Register = () => {
 
+    const [user, setUser]  = useState({
+        id: '',
+        name: '',
+        email: '',
+        password: ''
+    });
+
+    const valorInput = e => setUser({...user, [e.target.name]: e.target.value})
+
     const handleClickSignIn = () => {
         navigate('/login');
     }
+
+
+        const [valorName, setValorName] = useState('');
+        const [valorEmail, setValorEmail] = useState('');
+        const [valorSenha, setValorSenha] = useState('');
+       
+        const handleChangeName = (event) => {
+            setUser(event.target.value);
+            user.name = valorName
+        };
+
+        const handleChangeEmail = (event) => {
+            setUser(event.target.value);
+            user.email = valorEmail
+        };
+
+        const handleChangeSenha = (event) => {
+            setUser(event.target.value);
+            user.password = valorSenha
+        };
 
 
     const {
@@ -36,7 +67,7 @@ const Register = () => {
     
       const onSubmit = async formData => {
         try {
-            const {data} = await api.get(`http://localhost:8001/users?email=${formData.email}&senha=${formData.password}`);
+            const {data} = await api.push(`http://localhost:8001/users?email=${formData.email}&senha=${formData.password}`);
             if(data.length === 1){
                 navigate('/feed');
             } else {
@@ -47,11 +78,13 @@ const Register = () => {
         }
       };
 
-    const navigate = useNavigate();
+      const onPush = () => {
+       api.post('http://localhost:8001/users/', user)
+        .then( user => {console.log(user)})
+        .catch(error => console.log(error))
+      }
 
-    const handleClickLogin = () => {
-        navigate('/feed');
-    }
+    const navigate = useNavigate();
 
     return (
         <div>
@@ -66,12 +99,12 @@ const Register = () => {
                     <Wrapper>
                        <TitleLogin>Comece agora grátis</TitleLogin> 
                        <SubTitleLogin>Crie sua conta e make the change._</SubTitleLogin>
-                       <form onSubmit={handleSubmit(onSubmit)}>
-                        <Input name="name" control={control} placeholder="Nome Completo" leftIcon={<MdPerson/>}/>
-                        <Input name="email" control={control} errorMessage={errors?.email?.message} placeholder="E-mail" leftIcon={<MdEmail/>} />
-                        <Input name="password" control={control} errorMessage={errors?.password?.email} placeholder="Senha" type="password" leftIcon={<MdLock/>}/>
+                       <form onSubmit={onPush}>
+                        <Input value={user.name} onChange={valorInput} name="name" control={control} placeholder="Nome Completo" leftIcon={<MdPerson/>}/>
+                        <Input value={user.email} onChange={valorInput} id="email" name="email" control={control} errorMessage={errors?.email?.message} placeholder="E-mail" leftIcon={<MdEmail/>} />
+                        <Input value={user.password} onChange={valorInput} id="password" name="password" control={control} errorMessage={errors?.password?.email} placeholder="Senha" type="password" leftIcon={<MdLock/>}/>
                         <ButtonArea>
-                            <Button title="Criar minha conta" variant="secondary" type="submit"/> 
+                            <Button title="Criar minha conta" variant="secondary" type="submit" onClick={onPush}/> 
                         </ButtonArea>
                        </form>
                        <TitleRegister>Ao clicar em "criar minha conta grátis", declaro que aceito as Políticas de Privacidade e os Termos de Uso da DIO.</TitleRegister>
@@ -84,4 +117,4 @@ const Register = () => {
     )
 }
 
-export {Register}
+export {Register};

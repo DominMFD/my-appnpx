@@ -13,6 +13,7 @@ const Input = ({leftIcon, name, placeholder, control, errorMessage, ...rest}) =>
                 render={({ field }) => <InputText placeholder={placeholder} {...field}{...rest} />}
             />
             
+            
         </InputContainer>
         {errorMessage ? <TextError>{errorMessage}</TextError>: null}
         </>

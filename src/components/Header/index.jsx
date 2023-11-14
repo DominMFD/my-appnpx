@@ -1,5 +1,5 @@
 import React from "react";
-import { BuscarInputContainer, Column, Container, Menu, MenuRight, Row, Wrapper, UserPicture, Input } from "./styles";
+import { BuscarInputContainer, Container, Menu, MenuRight, Row, Wrapper, UserPicture, Input } from "./styles";
 import {Button} from '../Button'
 import logo from '../../assets/image/logodio.svg'
 import {useNavigate} from 'react-router-dom';
