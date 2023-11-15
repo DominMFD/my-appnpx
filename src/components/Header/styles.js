@@ -79,7 +79,7 @@ export const MenuRight = styled.a`
 
 export const UserPicture = styled.img`
     width: 32px;
-    heigth: 32px
+    heigth: 32px;
     border-radius: 22px;
     border: 2px solid #FFF;
 `

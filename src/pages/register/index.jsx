@@ -25,7 +25,7 @@ const Register = () => {
         id: '',
         name: '',
         email: '',
-        password: ''
+        senha: ''
     });
 
     const valorInput = e => setUser({...user, [e.target.name]: e.target.value})
@@ -79,9 +79,14 @@ const Register = () => {
       };
 
       const onPush = () => {
-       api.post('http://localhost:8001/users/', user)
-        .then( user => {console.log(user)})
-        .catch(error => console.log(error))
+        try {
+            api.post('http://localhost:8001/users/', user);
+            alert('Conta criada com sucesso');
+            navigate('/login')
+        }catch {
+            alert('Houve um erro, tente novamente.');
+        }
+       
       }
 
     const navigate = useNavigate();
@@ -102,9 +107,9 @@ const Register = () => {
                        <form onSubmit={onPush}>
                         <Input value={user.name} onChange={valorInput} name="name" control={control} placeholder="Nome Completo" leftIcon={<MdPerson/>}/>
                         <Input value={user.email} onChange={valorInput} id="email" name="email" control={control} errorMessage={errors?.email?.message} placeholder="E-mail" leftIcon={<MdEmail/>} />
-                        <Input value={user.password} onChange={valorInput} id="password" name="password" control={control} errorMessage={errors?.password?.email} placeholder="Senha" type="password" leftIcon={<MdLock/>}/>
+                        <Input value={user.senha} onChange={valorInput} id="senha" name="senha" control={control} errorMessage={errors?.password?.email} placeholder="Senha" type="password" leftIcon={<MdLock/>}/>
                         <ButtonArea>
-                            <Button title="Criar minha conta" variant="secondary" type="submit" onClick={onPush}/> 
+                            <Button title="Criar minha conta" variant="secondary" type="submit"/> 
                         </ButtonArea>
                        </form>
                        <TitleRegister>Ao clicar em "criar minha conta grátis", declaro que aceito as Políticas de Privacidade e os Termos de Uso da DIO.</TitleRegister>

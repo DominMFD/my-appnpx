@@ -35,6 +35,48 @@
       "name": "Kiriko",
       "email": "kiriko@gmail.com",
       "password": "123"
+    },
+    {
+      "id": 9,
+      "name": "Oiezinho",
+      "email": "oie@hotmail.com",
+      "password": "matheus14"
+    },
+    {
+      "id": 10,
+      "name": "Oiezinho",
+      "email": "oie@hotmail.com",
+      "password": "matheus14"
+    },
+    {
+      "id": 11,
+      "name": "oi",
+      "email": "oi@hotmail.com",
+      "password": "matheus1415"
+    },
+    {
+      "id": 12,
+      "name": "oi",
+      "email": "oi@hotmail.com",
+      "password": "matheus1415"
+    },
+    {
+      "id": 13,
+      "name": "Kiriko",
+      "email": "kiriko@gmail.com.br",
+      "password": "12345"
+    },
+    {
+      "id": 14,
+      "name": "Oiezinho",
+      "email": "oie@hotmail.com.br",
+      "senha": "matheus14"
+    },
+    {
+      "id": 15,
+      "name": "Nuy",
+      "email": "nuy@hotmail.com",
+      "senha": "1234"
     }
   ]
 }
