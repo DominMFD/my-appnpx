@@ -7,9 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import {api} from '../../services/api'
 
 import {Column, Container, CreateText, ForgetText, Row, SubTitleLogin, Title, TitleLogin, Wrapper} from './styles'
+import { IFormData } from './types';
+import axios from 'axios';
 
 const schema = yup
   .object({
@@ -24,15 +25,15 @@ const Login = () => {
         control,
         handleSubmit,
         formState: { errors, isValid },
-      } = useForm(
+      } = useForm<IFormData>(
         {resolver: yupResolver(schema), mode: 'onChange',}
       );
 
       console.log(isValid, errors);
     
-      const onSubmit = async formData => {
+      const onSubmit = async (formData: IFormData )=> {
         try {
-            const {data} = await api.get(`http://localhost:8001/users?email=${formData.email}&senha=${formData.password}`);
+            const {data} = await axios.get(`http://localhost:8001/users?email=${formData.email}&senha=${formData.password}`);
             if(data.length === 1){
                 navigate('/feed');
             } else {
@@ -64,7 +65,7 @@ const Login = () => {
                        <SubTitleLogin>Faça seu login e male the change._</SubTitleLogin>
                        <form onSubmit={handleSubmit(onSubmit)}>
                         <Input name="email" control={control} errorMessage={errors?.email?.message} placeholder="E-mail" leftIcon={<MdEmail/>} />
-                        <Input name="password" control={control} errorMessage={errors?.password?.email} placeholder="Senha" type="password" leftIcon={<MdLock/>}/>
+                        <Input name="password" control={control} errorMessage={errors?.password?.message} placeholder="Senha" type="password" leftIcon={<MdLock/>}/>
                         <Button title="Entrar" variant="secondary" type="submit"/>
                        </form>
                        <Row>

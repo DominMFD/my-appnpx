@@ -77,6 +77,12 @@
       "name": "Nuy",
       "email": "nuy@hotmail.com",
       "senha": "1234"
+    },
+    {
+      "id": 16,
+      "name": "Bom dia",
+      "email": "bomdia@hotmail.com",
+      "senha": "12345"
     }
   ]
 }

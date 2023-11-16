@@ -6,11 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import {api} from '../../services/api'
-import React, { useState } from 'react';
-import axios from "axios";
+import { useState } from 'react';
 
 import {Column, Container, SubTitleLogin, Title, TitleLogin, Wrapper, ButtonArea, TextLogin, TextGreen, TitleRegister} from './styles'
+import axios from 'axios';
 
 const schema = yup
   .object({
@@ -28,36 +27,14 @@ const Register = () => {
         senha: ''
     });
 
-    const valorInput = e => setUser({...user, [e.target.name]: e.target.value})
+    const valorInput = (e: { target: { name: any; value: any; }; }) => setUser({...user, [e.target.name]: e.target.value})
 
     const handleClickSignIn = () => {
         navigate('/login');
     }
 
-
-        const [valorName, setValorName] = useState('');
-        const [valorEmail, setValorEmail] = useState('');
-        const [valorSenha, setValorSenha] = useState('');
-       
-        const handleChangeName = (event) => {
-            setUser(event.target.value);
-            user.name = valorName
-        };
-
-        const handleChangeEmail = (event) => {
-            setUser(event.target.value);
-            user.email = valorEmail
-        };
-
-        const handleChangeSenha = (event) => {
-            setUser(event.target.value);
-            user.password = valorSenha
-        };
-
-
     const {
         control,
-        handleSubmit,
         formState: { errors, isValid },
       } = useForm(
         {resolver: yupResolver(schema), mode: 'onChange',}
@@ -65,22 +42,10 @@ const Register = () => {
 
       console.log(isValid, errors);
     
-      const onSubmit = async formData => {
-        try {
-            const {data} = await api.push(`http://localhost:8001/users?email=${formData.email}&senha=${formData.password}`);
-            if(data.length === 1){
-                navigate('/feed');
-            } else {
-                alert('Email ou senha inválido')
-            }
-        }catch{
-            alert('Houve um erro, tente novamente.')
-        }
-      };
 
       const onPush = () => {
         try {
-            api.post('http://localhost:8001/users/', user);
+            axios.post('http://localhost:8001/users/', user);
             alert('Conta criada com sucesso');
             navigate('/login')
         }catch {
@@ -107,7 +72,7 @@ const Register = () => {
                        <form onSubmit={onPush}>
                         <Input value={user.name} onChange={valorInput} name="name" control={control} placeholder="Nome Completo" leftIcon={<MdPerson/>}/>
                         <Input value={user.email} onChange={valorInput} id="email" name="email" control={control} errorMessage={errors?.email?.message} placeholder="E-mail" leftIcon={<MdEmail/>} />
-                        <Input value={user.senha} onChange={valorInput} id="senha" name="senha" control={control} errorMessage={errors?.password?.email} placeholder="Senha" type="password" leftIcon={<MdLock/>}/>
+                        <Input value={user.senha} onChange={valorInput} id="senha" name="senha" control={control} errorMessage={errors?.password?.message} placeholder="Senha" type="password" leftIcon={<MdLock/>}/>
                         <ButtonArea>
                             <Button title="Criar minha conta" variant="secondary" type="submit"/> 
                         </ButtonArea>

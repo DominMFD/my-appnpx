@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IColumn } from "../feed/types";
 
 export const Container = styled.main`
     width: 100%;
@@ -17,7 +18,7 @@ export const Wrapper = styled.div`
 
 `
 
-export const Column = styled.div`
+export const Column = styled.div<IColumn>`
  align-self: flex-start;
  flex: ${({flex}) => flex};
 `
